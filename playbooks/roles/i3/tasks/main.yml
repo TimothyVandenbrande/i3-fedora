@@ -14,10 +14,41 @@
     - py3status
     - feh
     - gnome-settings-daemon
+    - conky
+    - conky-manager
+    - dzen2
+    - acpi
   sudo: yes
+
+- name: create folders
+  action: file
+  args:
+    path: '{{ item }}'
+    state: directory
+  with_items:
+    - "~/.i3/backgrounds"
+    - "~/.i3/icons"
+    - "~/.i3/scripts"
+    - "~/.i3/xbm-icons"
 
 - name: template i3 config
   action: template
   args:
-    scr:
-    dest:
+    src: '{{ item }}.j2'
+    dest: '~/.i3/{{ item }}'
+  with_items:
+    - config
+    - i3status.conf
+    - startup_apps.sh
+
+- name: i3 applications
+  action: template
+  args:
+    src: '{{ item }}'.j2
+    dest: '/usr/bin/{{ item }}'
+    owner: root
+    mode: 'a+x'
+  with_items:
+    - i3-exit
+    - i3lock-wrapper
+  sudo: yes
