@@ -44,7 +44,7 @@
 - name: i3 applications
   action: template
   args:
-    src: '{{ item }}'.j2
+    src: '{{ item }}.j2'
     dest: '/usr/bin/{{ item }}'
     owner: root
     mode: 'a+x'
