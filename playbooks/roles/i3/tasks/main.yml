@@ -1,0 +1,23 @@
+---
+
+- name: install i3 packages
+  action: yum
+  args:
+    pkg: '{{ item }}'
+    state: installed
+  with_items:
+    - i3
+    - i3-doc
+    - i3lock
+    - i3status
+    - i3-ipc
+    - py3status
+    - feh
+    - gnome-settings-daemon
+  sudo: yes
+
+- name: template i3 config
+  action: template
+  args:
+    scr:
+    dest:

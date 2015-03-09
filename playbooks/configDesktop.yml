@@ -1,0 +1,8 @@
+---
+
+#- hosts: localhost
+- hosts: pc150002076
+  vars:
+    - user: exh345
+  roles:
+    - i3
