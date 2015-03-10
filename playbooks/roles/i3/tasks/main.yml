@@ -20,6 +20,14 @@
     - acpi
     - scrot
     - ImageMagick
+    - python-pip
+    - rdesktop
+  sudo: yes
+
+- name: install i3 python pkg
+  action: pip
+  args:
+    name: i3-py
   sudo: yes
 
 - name: create folders
@@ -53,4 +61,7 @@
   with_items:
     - i3-exit
     - i3lock-wrapper
+    - mws
+    - gws
+    - rdp
   sudo: yes
