@@ -18,6 +18,8 @@
     - conky-manager
     - dzen2
     - acpi
+    - scrot
+    - ImageMagick
   sudo: yes
 
 - name: create folders
