@@ -199,5 +199,6 @@ exec_always feh --bg-scale ~/Pictures/1480019.png
 exec_always export http_proxy="http://10.2.10.33:8888"
 exec_always export https_proxy="http://10.2.10.33:8888"
 exec /usr/libexec/gnome-settings-daemon
+exec /usr/bin/gsettings set org.gnome.settings-daemon.plugins.cursor active false
 exec --no-startup-id sleep 10
 exec ~/.i3/startup_apps.sh
