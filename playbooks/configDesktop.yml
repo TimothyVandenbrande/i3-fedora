@@ -6,3 +6,4 @@
     - user: exh345
   roles:
     - i3
+    - tools
