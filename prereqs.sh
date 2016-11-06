@@ -1,1 +1,1 @@
-dnf install -y ansible python-dnf libselinux-python --allowerasing
+sudo dnf install -y ansible python-dnf libselinux-python --allowerasing
