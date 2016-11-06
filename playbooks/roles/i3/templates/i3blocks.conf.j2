@@ -8,26 +8,26 @@ color=#e97ac8
 
 [mail]
 label=
-command=~/.i3/.mail.sh
+command=~/.i3/mail.sh
 interval=100
 color=#7F00FF
 
 [disk-root]
 label=:
-command=/usr/local/i3blocks/disk /
+command=/usr/local/libexec/i3blocks/disk /
 interval=30
 color=#1793D1
 
 
 [disk-home]
 label=:
-command=/usr/local/i3blocks/disk $HOME
+command=/usr/local/libexec/i3blocks/disk $HOME
 interval=30
 color=#859900
 
 [ssid]
 label=
-command=echo "$(iw dev wlo1 link | grep SSID | cut -d " " -f 2-)"
+command=echo "$(iw dev wlp1s0 link | grep SSID | cut -d " " -f 2-)"
 color=#d33682
 interval=5
 
@@ -35,7 +35,7 @@ interval=5
 
 [wireless]
 instance=wlp1s0
-command=/usr/local/i3blocks/iface
+command=/usr/local/libexec/i3blocks/iface
 color=#00FF00
 interval=10
 
@@ -51,21 +51,20 @@ interval=10
 color=#b58900
 
 [battery]
-
-command=~/.i3/battery BAT0
-
+label=
+command=/usr/local/libexec/i3blocks/battery
 interval=30
 
 [load]
 label=
-command=/usr/local/i3blocks/load_average
+command=/usr/local/libexec/i3blocks/load_average
 interval=10
 color=#6c71c4
 
 
 [volume]
 label=
-command=/usr/local/i3blocks/volume
+command=/usr/local/libexec/i3blocks/volume
 interval=2
 signal=10
 color=#d70a53

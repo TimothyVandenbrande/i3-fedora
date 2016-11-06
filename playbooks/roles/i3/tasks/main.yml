@@ -1,18 +1,28 @@
 ---
 
 - name: enable repos
-  yum:
+  dnf:
     pkg: "{{ item }}"
   with_items:
     - "http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/russianfedora-free-release-stable.noarch.rpm"
     - "http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/russianfedora-nonfree-release-stable.noarch.rpm"
     - "https://downloads.slack-edge.com/linux_releases/slack-2.2.1-0.1.fc21.x86_64.rpm"
+    - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm"
+    - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm"
+  become: yes
+
+- name: fedora-negativo17.repo
+  copy:
+    src: fedora-negativo17.repo
+    dest: /etc/yum.repos.d/fedora-negativo17.repo
+  become: yes
 
 - name: install i3 packages
-  yum:
+  dnf:
     pkg: '{{ item }}'
     state: installed
   with_items:
+    - vim
     - i3
     - i3-doc
     - i3lock
@@ -26,6 +36,7 @@
     - conky-manager
     - chromium
     - dzen2
+    - dunst
     - acpi
     - scrot
     - ImageMagick
@@ -34,17 +45,27 @@
     - terminator
     - rofi
     - telegram-desktop
-  sudo: yes
+    - libselinux-python
+    - screenfetch
+    - fontawesome-fonts
+    - spotify-client
+    - steam
+  become: yes
 
 - name: copy wallpaper
   copy:
     src: pure-green-smoke.jpeg
     dest: ~/Pictures/pure-green-smoke.jpeg
 
+- name: nice intro on 1st terminal
+  lineinfile:
+    line: screenfetch
+    dest: ~/.bash_profile
+
 - name: install i3 python pkg
   pip:
     name: i3-py
-  sudo: yes
+  become: yes
 
 - name: create folders
   file:
@@ -57,6 +78,13 @@
     - "~/.i3/scripts"
     - "~/.i3/xbm-icons"
     - "~/.local/share/fonts"
+    - "~/.config/terminator"
+
+- name: put terminator config
+  template:
+    src: terminator-config.j2
+    dest: "~/.config/terminator/config"
+
 
 - name: put fonts
   copy:
@@ -64,10 +92,10 @@
     dest: "~/.local/share/fonts/{{ item }}"
   with_items:
     - AIcons.ttf
-    - fontawesome-webfont.ttf
+    #- fontawesome-webfont.ttf
     - icons.ttf
 
-- name: initilise fonts
+- name: initialise fonts
   shell: fc-cache -fv
 
 - git:
@@ -86,7 +114,7 @@
 - shell: make install
   args:
     chdir: "/tmp/i3blocks"
-  sudo: yes
+  become: yes
 
 - name: template i3 config
   template:
@@ -95,13 +123,21 @@
   with_items:
     - config
     - i3status.conf
-    - i3block.conf
+    - i3blocks.conf
+    - mail.sh
+    - startup_apps.sh
+
+- name: make executable
+  file:
+    path: '~/.i3/{{ item }}'
+    mode: 'a+x'
+  with_items:
     - mail.sh
     - startup_apps.sh
 
 - name: i3 applications
   copy:
-    src: '{{ item }}.j2'
+    src: '{{ item }}'
     dest: '~/.bin/{{ item }}'
     mode: 'a+x'
   with_items:
@@ -109,4 +145,4 @@
     - i3lock-wrapper
     - mws
     - gws
-    - battery
+    - IconicWeather.sh
