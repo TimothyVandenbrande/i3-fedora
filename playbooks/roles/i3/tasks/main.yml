@@ -50,6 +50,7 @@
     - fontawesome-fonts
     - spotify-client
     - steam
+    - glances
   become: yes
 
 - name: copy wallpaper
