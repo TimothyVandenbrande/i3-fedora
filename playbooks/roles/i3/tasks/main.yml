@@ -9,7 +9,7 @@
     - "https://downloads.slack-edge.com/linux_releases/slack-2.2.1-0.1.fc21.x86_64.rpm"
     - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm"
     - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm"
-    - "https://github.com/atom/atom/releases/download/v1.12.0-beta7/atom.x86_64.rpm"
+    - "https://github.com/atom/atom/releases/download/v1.11.2/atom.x86_64.rpm"
   become: yes
 
 - name: fedora-negativo17.repo
@@ -30,7 +30,6 @@
     - i3status
     - i3-ipc
     - py3status
-    - atom
     - feh
     - gnome-settings-daemon
     - conky
