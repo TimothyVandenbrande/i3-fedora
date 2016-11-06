@@ -4,6 +4,14 @@
   dnf:
     pkg: "{{ item }}"
   with_items:
+    - python-dnf --allowerasing
+    - libselinux-python
+  become: yes
+
+- name: enable repos
+  dnf:
+    pkg: "{{ item }}"
+  with_items:
     - "http://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/russianfedora-free-release-stable.noarch.rpm"
     - "http://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/russianfedora-nonfree-release-stable.noarch.rpm"
     - "https://downloads.slack-edge.com/linux_releases/slack-2.2.1-0.1.fc21.x86_64.rpm"
